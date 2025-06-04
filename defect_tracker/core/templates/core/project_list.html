@@ -1,0 +1,18 @@
+<!-- core/templates/core/project_list.html -->
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>Your Projects</h2>
+<a href="{% url 'create_project' %}" class="btn btn-success mb-3">Create New Project</a>
+
+<div class="list-group">
+    {% for project in projects %}
+    <a href="{% url 'project_detail' project.pk %}" class="list-group-item list-group-item-action">
+        <h5>{{ project.title }}</h5>
+        <p class="mb-1">{{ project.description }}</p>
+        <small>Created by: {{ project.creator.username }}</small>
+    </a>
+    {% empty %}
+    <div class="alert alert-info">No projects found. Create your first project!</div>
+    {% endfor %}
+</div>
+{% endblock %}

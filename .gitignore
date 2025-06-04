@@ -1,0 +1,38 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+env/
+venv/
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Virtual Environment
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Database migrations (except initial)
+core/migrations/*
+
+# Keep the initial migration
+!core/migrations/__init__.py
+
+# Local settings
+settings/local.py
+
+# Secret key
+secret_key.txt

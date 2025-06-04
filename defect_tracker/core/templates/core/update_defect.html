@@ -1,0 +1,17 @@
+<!-- core/templates/core/update_defect.html -->
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content-section">
+    <h3>Update Defect: {{ defect.title }}</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+            <a href="{% url 'project_detail' defect.project.pk %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

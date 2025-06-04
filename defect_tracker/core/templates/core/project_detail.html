@@ -1,0 +1,42 @@
+<!-- core/templates/core/project_detail.html -->
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="content-section">
+    <h2>{{ project.title }}</h2>
+    <p>{{ project.description }}</p>
+    <small class="text-muted">Created by {{ project.creator.username }} on {{ project.created_at }}</small>
+
+    {% if request.user == project.creator %}
+        <a href="{% url 'add_member' project.pk %}" class="btn btn-primary mt-3">Add Member</a>
+    {% endif %}
+
+    <h3 class="mt-4">Defects</h3>
+    <a href="{% url 'create_defect' project.pk %}" class="btn btn-success mb-3">Create New Defect</a>
+
+    <div class="list-group">
+        {% for defect in defects %}
+        <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5>{{ defect.title }}</h5>
+                    <span class="badge 
+                        {% if defect.status == 'OPEN' %}badge-danger
+                        {% elif defect.status == 'IN_PROGRESS' %}badge-warning
+                        {% else %}badge-success{% endif %}">
+                        {{ defect.get_status_display }}
+                    </span>
+                </div>
+                <div>
+                    <a href="{% url 'update_defect' defect.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                </div>
+            </div>
+    <p class="mt-2">{{ defect.description }}</p>
+    <small class="text-muted">
+        Created by: {{ defect.created_by.username }} | 
+        Assigned to: {{ defect.assigned_to|default:"Unassigned" }}
+    </small>
+</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
